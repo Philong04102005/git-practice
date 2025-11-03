@@ -61,6 +61,42 @@ def post_to_facebook_group(driver: WebDriver, group_url: str, content = None, im
     post_button.click()
     time.sleep(5)
 
+def postFb(driver: WebDriver, content = None, img = None):
+    post_box = driver.find_element(
+        By.XPATH,
+        "//span[contains(text(), 'Bạn đang nghĩ gì?')]/../..",
+    )
+    if not post_box:
+        return "[SKIP] Không tìm thấy nút 'Đăng bài'."
+
+    time.sleep(0.2)
+    post_box.click()
+    time.sleep(random.uniform(3, 5))
+
+    # Nhập content
+    if content != None:
+        active_box = driver.find_element(
+            By.XPATH,
+            "/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div[1]/form/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div[1]/div/div/div[1]",
+        )
+        active_box.send_keys(content)
+        time.sleep(random.uniform(3, 5))
+
+    # Tải hình ảnh lên
+    if img != "Không cần ảnh":
+        file_input = driver.find_element(
+            By.XPATH,
+            "//input[@type='file' and @accept='image/*,image/heif,image/heic,video/*,video/mp4,video/x-m4v,video/x-matroska,.mkv']",
+        )
+        file_input.send_keys(img)
+        time.sleep(random.uniform(3, 5))
+
+    # Nút đăng bài
+    post_button = driver.find_element(By.XPATH, "//div[@aria-label='Đăng']")
+    post_button.click()
+    time.sleep(5)
+
+
 
 def read_content(path):
     contents = pd.read_csv(path)

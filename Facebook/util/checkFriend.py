@@ -18,12 +18,15 @@ def login(driver):
     driver.execute_script("window.scrollBy(0, 1300);")
     time.sleep(3)
     
-# def search_friend(driver: WebDriver):
-#     xpath = "//span[contains(text(), 'người bạn')]"
-#     element = driver.find_element(By.XPATH, xpath)
-#     num = int((element.text).split(" ")[0])
-#     return num
+def search_friend(driver: WebDriver):
+    xpath = "//span[contains(text(), 'người bạn')]"
+    element = driver.find_element(By.XPATH, xpath)
+    num = int((element.text).split(" ")[0])
+    return num
 
+def search_frient_human():
+    num = int(input("Số bạn bè: "))
+    return num
 
 def check_post(driver: WebDriver):
     xpath = "//span[contains(text(), 'người bạn')]"
@@ -34,33 +37,32 @@ def check_post(driver: WebDriver):
 
     
 def main():
-    account = pd.read_csv("../data/account/account_checked.csv")
+    account = pd.read_csv("../data/account/status_false.csv")
     today = date.today()
     cookies = os.listdir("../data/account/cookie")
-    account["Message"] = "n"
-    account["Post"] = "n"
-    account["TotalFriends"] = account["TotalFriends_2025-10-29"]
-    account[f"TotalFriends_{today}"] = 0
-    account.drop("TotalFriends_2025-10-29", axis=1, inplace=True)
+    # account["TotalFriends"] = account["TotalFriends_2025-10-29"]
+    # account.drop("TotalFriends_2025-10-29", axis=1, inplace=True)
     for cookie in cookies:
         acc_id = cookie.split(".")[0]
-        if (account.iloc[:,0] == acc_id).any():
-            print(f"[INFO] Đang xử lý tài khoản với ID: {acc_id}")
-            driver = loginFacebookWithCookies.runLogin(f"../data/account/cookie/{cookie}")
-            if driver:
-                login(driver=driver)
-                # num = search_friend(driver)
-                num = int(input("Nhập số bạn bè: "))
-                index = int([i for i in range(len(account)) if account.iloc[i, 0] == acc_id][0])             
-                mess = input("Có nhắn tin không: ")
-                post_ = input("Có đăng bài không: ")
-                account.at[index, f"TotalFriend_{today}"] = num
-                account.at[index, "Message"] = mess
-                account.at[index, "Post"] = post_
-                driver.quit()
-            else:
-                print(f"[ERROR] Không thể đăng nhập tài khoản với ID: {acc_id}")
-    account.to_csv(r"C:\PhiLong\Revoland\Revoland_AI-Automation\Seeding\Facebook\data\account\account_checked.csv")
+        if acc_id in ["acc_0026", "acc_0094"]:
+            if (account.iloc[:,0] == acc_id).any():
+                print(f"[INFO] Đang xử lý tài khoản với ID: {acc_id}")
+                driver = loginFacebookWithCookies.runLogin(f"../data/account/cookie/{cookie}")
+                if driver:
+                    login(driver=driver)
+                    # try:
+                    #     num = search_friend(driver)
+                    # except Exception as e:
+                    #     num = 0
+                    num = search_frient_human()
+                    print(f"Sô bạn bè: {num}")
+                    index = int([i for i in range(len(account)) if account.iloc[i, 0] == acc_id][0])             
+                    account.at[index, "TotalFriends"] = num
+                    account.to_csv("../data/account/status_false.csv", index=False)
+                    driver.quit()
+                else:
+                    print(f"[ERROR] Không thể đăng nhập tài khoản với ID: {acc_id}")
+    
     
 if __name__ == "__main__":
     main()

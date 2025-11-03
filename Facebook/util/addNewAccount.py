@@ -38,4 +38,4 @@ for user in list_user_new:
 # for user in list_user_new:
 #     reset_account_list = pd.concat([reset_account_list, account_checked.apply(lambda x: x["username"] == user, axis=1)])
 # print(len(list_user_new) == len(reset_account_list))
-print(reset_account_list)
+# print(reset_account_list)

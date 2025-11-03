@@ -52,11 +52,13 @@ class FacebookAccountManager:
                     'username': str(row['username']).strip(),
                     'password': str(row['password']).strip(),
                     'name': str(row['name']).strip(),
-                    'status': bool(row['status'])
+                    'status': bool(row['status']),#
+                    #################################Chỉnh nè
+                    "Type": ""
                 }
                 accounts.append(account)
-            
             print(f"[INFO] Đã tải {len(accounts)} tài khoản từ {self.csv_path}")
+
             return accounts
         except Exception as e:
             print(f"[ERROR] Không thể tải file CSV: {e}")
@@ -180,6 +182,7 @@ class FacebookAccountManager:
                 self.close_popup(driver)
                 return True
             print(f"[ERROR] Đăng nhập thất bại cho tài khoản: {username}")
+
             return False
         except Exception as e:
             print(f"[ERROR] Lỗi đăng nhập: {e}")
@@ -210,6 +213,9 @@ class FacebookAccountManager:
             self.save_cookies(driver, account['acc_id'])
             print(f"[SUCCESS] Đăng nhập và lưu cookie thành công cho {account['acc_id']} - {account['name']}")
         else:
+            #####################Chỉnh tip
+            type = input("Thể loại: ")
+            account["Type"] = type 
             driver.quit()
     def update_csv(self):
         """Cập nhật status mới vào file CSV."""
@@ -231,20 +237,18 @@ def Menu():
     print("3. Lọc Account đã dead")
 
 def main(): 
-    Menu()
-    choice = int(input("Nhập lựa chọn của bạn: "))
-    choice = "_checked.csv" if choice == 1 else "_not_check.csv" if choice == 2 else False
-    num_acc = int(input("Nhập số lượng account muốn check: "))
-    mainager = FacebookAccountManager(f"data/account/account{choice}") 
+    # Menu()
+    # choice = int(input("Nhập lựa chọn của bạn: "))
+    # choice = "_checked.csv" if choice == 1 else "_not_check.csv" if choice == 2 else False
+    acc_list = ["acc_0081", "acc_0082", "acc_0084", "acc_0094", "acc_0112"]
+    mainager = FacebookAccountManager(f"data/account/status_false.csv") 
     for account in mainager.accounts:
-        if num_acc == 0:
-            break
-        print(f"\n[INFO] Xử lý tài khoản: {account['acc_id']} - {account['name']} ({account['username']})")
-        mainager.login_and_getCookie(account)
-        time.sleep(5)  # nghỉ giữa các lần đăng nhập tránh bị block
-        num_acc -= 1
-    
-    mainager.update_csv(choice.split('.')[0])
+        if account["acc_id"] in acc_list:
+            print(f"\n[INFO] Xử lý tài khoản: {account['acc_id']} - {account['name']} ({account['username']})")
+            mainager.login_and_getCookie(account)
+            time.sleep(5)  # nghỉ giữa các lần đăng nhập tránh bị block
+
+    mainager.update_csv()
 
 if __name__ == "__main__":
     main()

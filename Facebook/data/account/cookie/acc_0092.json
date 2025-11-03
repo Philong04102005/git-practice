@@ -1,0 +1,91 @@
+[
+  {
+    "domain": ".facebook.com",
+    "expiry": 1796441442,
+    "httpOnly": true,
+    "name": "ps_l",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "1"
+  },
+  {
+    "domain": ".facebook.com",
+    "httpOnly": false,
+    "name": "presence",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "C%7B%22t3%22%3A%5B%5D%2C%22utc3%22%3A1761881445920%2C%22v%22%3A1%7D"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1769657441,
+    "httpOnly": true,
+    "name": "fr",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "0zUxSgRKtBctwdzac.AWeqlRJ7gZxPUF5O2VrQU1oM1jqCVYz3smjwpy9elZOZH6Bo_DI.BpBC0S..AAA.0.0.BpBC0k.AWdQ254oSrKfVmF3DWZluwFap6E"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1793417441,
+    "httpOnly": true,
+    "name": "xs",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "32%3Ac-hco8FHqtpJ_A%3A2%3A1761881378%3A-1%3A-1"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1793417441,
+    "httpOnly": false,
+    "name": "c_user",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "61579112982581"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1762486245,
+    "httpOnly": false,
+    "name": "wd",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "921x896"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1796441442,
+    "httpOnly": true,
+    "name": "ps_n",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "1"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1796441441,
+    "httpOnly": true,
+    "name": "sb",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "Ei0EabbMxXI2T-KweYx9cYLc"
+  },
+  {
+    "domain": ".facebook.com",
+    "expiry": 1796441423,
+    "httpOnly": true,
+    "name": "datr",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "Ei0EaUrA-M0L-eBBlg6IzMMe"
+  }
+]
